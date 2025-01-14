@@ -6,12 +6,15 @@
 <script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="slides_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="slides_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Martin Herrerias Azcue">
-  <meta name="dcterms.date" content="2024-11-28">
-  <title>R-Markdown Flavored Slides</title>
+  <meta name="dcterms.date" content="2025-01-14">
+  <title>Workflow Engines</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,8 +197,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">R-Markdown Flavored Slides</h1>
-  <p class="subtitle">Powered by Quarto + Reveal.js</p>
+  <h1 class="title">Workflow Engines</h1>
+  <p class="subtitle">CWL / Snakemake / Nextflow</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -208,46 +211,523 @@ Martin Herrerias Azcue
     </div>
 </div>
 
-  <p class="date">2024-11-28</p>
+  <p class="date">2025-01-14</p>
 </section>
-<section id="quarto" class="slide level2">
-<h2>Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <a href="https://quarto.org/docs/presentations/" class="uri">https://quarto.org/docs/presentations/</a>.</p>
-</section>
-<section id="bullets" class="slide level2">
-<h2>Bullets</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes:</p>
+<section id="disclaimer" class="slide level2">
+<h2>Disclaimer</h2>
+<p>Everything on this presentation is based on available documentation, and my (very) limited experience:</p>
 <ul>
-<li>Content authored with markdown</li>
-<li>Output from executable code</li>
+<li><strong>CWL</strong>: (part of) one project</li>
+<li><strong>Snakemake</strong>: intro workshop, toy examples</li>
+<li><strong>Nextflow</strong>: docs only</li>
 </ul>
 </section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<p>When you click the <strong>Render</strong> button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<section id="scientific-workflow-systems" class="slide level2">
+<h2>Scientific Workflow Systems</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/workflow_example.gif" style="width:70.0%"></p>
+<figcaption>Curcin &amp; Ghanem (2008)</figcaption>
+</figure>
 </div>
-</div>
+<ul>
+<li><strong>Cross-language</strong> tool integration</li>
+<li><strong>Dependency management</strong>: result caching, checkpointing, and partial re-execution</li>
+<li><strong>Resource management</strong>: cluster/cloud support, scalable parallel execution</li>
+<li><strong>Error management</strong>: health checks &amp; retries</li>
+<li><strong>Provenance tracking</strong>: logging &amp; reporting of metadata</li>
+<li><strong>Containerization</strong></li>
+</ul>
 </section>
-<section id="fancier-code-blocks" class="slide level2">
-<h2>Fancier Code Blocks</h2>
-<div class="cell">
+<section id="no-shortage-of-options" class="slide level2">
+<h2>No shortage of options</h2>
+<p><a href="https://github.com/meirwah/awesome-workflow-engines/" class="uri">https://github.com/meirwah/awesome-workflow-engines/</a></p>
+<p>&nbsp;</p>
+<h4 id="why-these-three">Why these three?</h4>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Open Source</li>
+<li>Popular for Scientific Workflows</li>
+<li>Lightweight, easy to setup (cf.&nbsp;<em>Galaxy</em>)</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="images/workflow_classification.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Leipzig (2017)"><img data-src="images/workflow_classification.jpeg" alt="Leipzig (2017)"></a></p>
+<figcaption>Leipzig (2017)</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="developer-user-base" class="slide level2 scrollable">
+<h2>Developer &amp; user-base</h2>
+<h4 id="nextflow"><a href="https://github.com/nextflow-io/nextflow">Nextflow</a></h4>
+<ul>
+<li><em>sequera</em> (Bioinformatics software company) , <code>nf_core</code> (community)</li>
+<li>2.8 k⭐ (GitHub)</li>
+<li>Bioinformatics, some image processing &amp; ML</li>
+</ul>
+<h4 id="snakemake"><a href="https://github.com/snakemake/snakemake">Snakemake</a></h4>
+<ul>
+<li>Johannes Köster (CS Bioinformatics at University of Duisburg-Essen)</li>
+<li>2.3 k⭐(GitHub)</li>
+<li>Bioinformatics</li>
+</ul>
+<h4 id="cwl"><a href="https://github.com/common-workflow-language">CWL</a></h4>
+<ul>
+<li>CWL Community, Leadership- &amp; Technical Team<sup>1</sup></li>
+<li>0.3 k⭐(GitHub, cwltool)</li>
+<li>Bioinformatics, astronomy, meteorology, health science</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Including (eScience Lab @ UOM)[https://esciencelab.org.uk/activities/cwl/)</p></li></ol></aside></section>
+<section id="user-base-cont." class="slide level2">
+<h2>User-base (cont.)</h2>
+  <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3940_RC01/embed_loader.js"></script>
+  <script type="text/javascript">
+    trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/11h3lfyctn","geo":"","time":"2004-01-01 2025-01-13"},{"keyword":"/g/11r6x6wjfr","geo":"","time":"2004-01-01 2025-01-13"},{"keyword":"/g/11h4q983sx","geo":"","time":"2004-01-01 2025-01-13"}],"category":0,"property":""}, {"exploreQuery":"date=all&q=%2Fg%2F11h3lfyctn,%2Fg%2F11r6x6wjfr,%2Fg%2F11h4q983sx&hl=en","guestPath":"https://trends.google.com:443/trends/embed/"});
+  </script>
+</section>
+<section id="design-platform" class="slide level2">
+<h2>Design &amp; Platform</h2>
+<h4 id="snakemake-1">Snakemake</h4>
+<ul>
+<li><strong><em>Workflow Engine</em></strong>, Windows &amp; UNIX (Conda)</li>
+<li>Python dialect (custom parser)</li>
+<li>Minimal, focus on simplicity.</li>
+</ul>
+<h4 id="nextflow-1">Nextflow</h4>
+<ul>
+<li><strong><em>Workflow Engine</em></strong>, UNIX (Bash, Java 11+)</li>
+<li>YAML + Groovy DSL (Java dialect)</li>
+<li>Focus on flexibility, scalability &amp; performance</li>
+</ul>
+<h4 id="cwl-1">CWL</h4>
+<ul>
+<li><strong><em>2 Specifications</em></strong> + runners (e.g.&nbsp;<code>cwltool</code>, <code>Toil</code>, <code>Arvados</code>, UNIX)</li>
+<li>YAML + JavaScript</li>
+<li>Verbose &amp; explicit, focus on interoperability</li>
+</ul>
+</section>
+<section id="worflow-patterns" class="slide level2">
+<h2>Worflow Patterns</h2>
+<p>How dependencies are tracked and execution is controlled.</p>
+<h4 id="snakemake-2">Snakemake</h4>
+<ul>
+<li>Wildcard-based, relies on IO directory structure</li>
+<li>Input/output functions allow for dynamic names</li>
+<li>Target-driven (predefined output names!)</li>
+</ul>
+<h4 id="nextflow-2">Nextflow</h4>
+<ul>
+<li>Dataflow model (processes, channels, operators)</li>
+<li>Output globbing (flat output directory)</li>
+<li>Input globbing (<em>Channel Factories</em>)</li>
+</ul>
+<h4 id="cwl-2">CWL</h4>
+<ul>
+<li>Explicit inputs &amp; outputs</li>
+<li>Output globbing (flat output directory)</li>
+<li>Input/output JS expressions</li>
+<li>Step/data/target-driven (<code>cwltool</code>)</li>
+</ul>
+</section>
+<section id="staging-checkpointing" class="slide level2">
+<h2>Staging / Checkpointing</h2>
+<p>Whether tools run in isolated directories, and interrupted workflows can be resumed.</p>
+<h4 id="snakemake-3">Snakemake</h4>
+<ul>
+<li>Optional staging, default execution in directory hierarchy</li>
+<li>Reactive evaluation (optional re-evaluation <code>-F</code>)</li>
+</ul>
+<h4 id="nextflow-3">Nextflow</h4>
+<ul>
+<li>Automatic staging</li>
+<li>Reactive evaluation (optional <code>-resume</code>)</li>
+</ul>
+<h4 id="cwl-3">CWL</h4>
+<ul>
+<li>Explicit staging</li>
+<li>Optional <code>--cachedir</code> (patchy in <code>cwltool</code>)</li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>A bash script that “processes” some CSV data:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>fake_script.R</strong></pre>
+<pre><strong>dummy.sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Multiply two numbers</span></span>
-<span id="cb3-2"><a href=""></a>multiply <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
-<span id="cb3-3"><a href=""></a>  <span class="fu">return</span>(a <span class="sc">*</span> b)</span>
-<span id="cb3-4"><a href=""></a>}</span>
-<span id="cb3-5"><a href=""></a><span class="fu">multiply</span>(<span class="at">a =</span> <span class="dv">6</span>, <span class="at">b =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="dummy.sh"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="fu">cp</span> <span class="st">"</span><span class="va">$1</span><span class="st">"</span> <span class="st">"</span><span class="va">$2</span><span class="st">"</span></span>
+<span id="cb1-4"><a href=""></a><span class="bu">echo</span> <span class="st">"File '</span><span class="va">$1</span><span class="st">' copied to '</span><span class="va">$2</span><span class="st">'."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="snakemake-4" class="slide level2">
+<h2>Snakemake</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>process.smk</strong></pre>
 </div>
+<div class="sourceCode" id="cb2" data-filename="process.smk"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href=""></a><span class="co"># run with: snakemake -c1 -s process.smk</span></span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="fu">rule all</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href=""></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span><span class="at"> </span><span class="st">"results/monkeys.txt"</span></span>
+<span id="cb2-5"><a href=""></a></span>
+<span id="cb2-6"><a href=""></a><span class="fu">rule process_data</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href=""></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href=""></a><span class="at">        </span><span class="st">"data/{data}.csv"</span></span>
+<span id="cb2-9"><a href=""></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href=""></a><span class="at">        </span><span class="st">"results/{data}.txt"</span></span>
+<span id="cb2-11"><a href=""></a><span class="at">    </span><span class="fu">log</span><span class="kw">:</span></span>
+<span id="cb2-12"><a href=""></a><span class="at">        </span><span class="st">"results/{data}.log"</span></span>
+<span id="cb2-13"><a href=""></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb2-14"><a href=""></a><span class="at">        </span><span class="st">"dummy.sh {input} {output} &gt; {log}"</span></span>
+<span id="cb2-15"><a href=""></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="nextflow-4" class="slide level2">
+<h2>Nextflow</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>process.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="process.nf"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href=""></a></span>
+<span id="cb3-2"><a href=""></a><span class="fu">// run with</span><span class="kw">:</span><span class="at"> nextflow run nextflow/process.nf</span></span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="at">params.data = "$launchDir/data/monkeys.csv"</span></span>
+<span id="cb3-5"><a href=""></a><span class="at">params.results = "$launchDir/results"</span></span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a><span class="at">process process_data {</span></span>
+<span id="cb3-8"><a href=""></a></span>
+<span id="cb3-9"><a href=""></a><span class="at">    publishDir params.results</span></span>
+<span id="cb3-10"><a href=""></a></span>
+<span id="cb3-11"><a href=""></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb3-12"><a href=""></a><span class="at">    path data</span></span>
+<span id="cb3-13"><a href=""></a></span>
+<span id="cb3-14"><a href=""></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb3-15"><a href=""></a><span class="at">    path "${data.baseName}.txt" </span></span>
+<span id="cb3-16"><a href=""></a><span class="at">    path "${data.baseName}.log"</span></span>
+<span id="cb3-17"><a href=""></a></span>
+<span id="cb3-18"><a href=""></a><span class="at">    </span><span class="fu">script</span><span class="kw">:</span></span>
+<span id="cb3-19"><a href=""></a><span class="at">    // requires dummy.sh to be in $projectDir/bin</span></span>
+<span id="cb3-20"><a href=""></a><span class="at">    </span><span class="st">""</span><span class="at">"</span></span>
+<span id="cb3-21"><a href=""></a><span class="at">    dummy.sh ${data} ${data.baseName}.txt &gt; ${data.baseName}.log</span></span>
+<span id="cb3-22"><a href=""></a><span class="at">    </span><span class="st">""</span><span class="at">" </span></span>
+<span id="cb3-23"><a href=""></a><span class="at">}</span></span>
+<span id="cb3-24"><a href=""></a></span>
+<span id="cb3-25"><a href=""></a><span class="at">workflow {</span></span>
+<span id="cb3-26"><a href=""></a><span class="at">    process_data(params.data)</span></span>
+<span id="cb3-27"><a href=""></a><span class="at">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cwl-data" class="slide level2">
+<h2>CWL (data)</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>inputs.yml</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="inputs.yml"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href=""></a><span class="fu">data_file</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href=""></a><span class="at">  </span><span class="fu">class</span><span class="kw">:</span><span class="at"> File</span></span>
+<span id="cb4-3"><a href=""></a><span class="at">  </span><span class="fu">path</span><span class="kw">:</span><span class="at"> ../data/monkeys.csv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cwl-tool" class="slide level2">
+<h2>CWL (tool)</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>tool.cwl</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="tool.cwl"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href=""></a><span class="fu">cwlVersion</span><span class="kw">:</span><span class="at"> v1.2</span></span>
+<span id="cb5-2"><a href=""></a><span class="fu">class</span><span class="kw">:</span><span class="at"> CommandLineTool</span></span>
+<span id="cb5-3"><a href=""></a><span class="fu">label</span><span class="kw">:</span><span class="at"> dummy.sh tool wrapper</span></span>
+<span id="cb5-4"><a href=""></a><span class="fu">doc</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb5-5"><a href=""></a>    Example tool wrapper, for dummy.sh script</span>
+<span id="cb5-6"><a href=""></a>    (copies a &lt;data&gt;.csv file to &lt;data&gt;.txt</span>
+<span id="cb5-7"><a href=""></a>    and echoes a message to &lt;data&gt;.log)</span>
+<span id="cb5-8"><a href=""></a></span>
+<span id="cb5-9"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb5-10"><a href=""></a><span class="at">  </span><span class="fu">InlineJavascriptRequirement</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
+<span id="cb5-11"><a href=""></a><span class="at">  </span><span class="fu">InitialWorkDirRequirement</span><span class="kw">:</span></span>
+<span id="cb5-12"><a href=""></a><span class="at">    </span><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb5-13"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">entryname</span><span class="kw">:</span><span class="at"> dummy.sh</span></span>
+<span id="cb5-14"><a href=""></a><span class="at">        </span><span class="fu">entry</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at"> </span><span class="fu">$include</span><span class="kw">:</span><span class="at"> ../dummy.sh </span><span class="kw">}</span></span>
+<span id="cb5-15"><a href=""></a></span>
+<span id="cb5-16"><a href=""></a><span class="fu">baseCommand</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">bash</span><span class="kw">,</span><span class="at"> dummy.sh</span><span class="kw">]</span></span>
+<span id="cb5-17"><a href=""></a><span class="fu">arguments</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb5-18"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">valueFrom</span><span class="kw">:</span><span class="at"> </span><span class="st">"out.txt"</span></span>
+<span id="cb5-19"><a href=""></a><span class="at">    </span><span class="fu">position</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb5-20"><a href=""></a></span>
+<span id="cb5-21"><a href=""></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb5-22"><a href=""></a><span class="at">  </span><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb5-23"><a href=""></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> CSV file to process</span></span>
+<span id="cb5-24"><a href=""></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> File</span></span>
+<span id="cb5-25"><a href=""></a><span class="at">    </span><span class="fu">inputBinding</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="fu">position</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span><span class="kw">}</span></span>
+<span id="cb5-26"><a href=""></a></span>
+<span id="cb5-27"><a href=""></a><span class="fu">stdout</span><span class="kw">:</span><span class="at"> $(inputs.data.nameroot + ".log")</span></span>
+<span id="cb5-28"><a href=""></a></span>
+<span id="cb5-29"><a href=""></a><span class="fu">outputs</span><span class="kw">:</span></span>
+<span id="cb5-30"><a href=""></a><span class="at">  </span><span class="fu">results_file</span><span class="kw">:</span></span>
+<span id="cb5-31"><a href=""></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> File</span></span>
+<span id="cb5-32"><a href=""></a><span class="at">    </span><span class="fu">outputBinding</span><span class="kw">:</span></span>
+<span id="cb5-33"><a href=""></a><span class="at">        </span><span class="fu">glob</span><span class="kw">:</span><span class="at"> </span><span class="st">"out.txt"</span></span>
+<span id="cb5-34"><a href=""></a><span class="at">        </span><span class="fu">outputEval</span><span class="kw">:</span><span class="at"> ${self[0].basename = inputs.data.nameroot + ".txt"; return self;}</span></span>
+<span id="cb5-35"><a href=""></a><span class="at">  </span><span class="fu">log_file</span><span class="kw">:</span></span>
+<span id="cb5-36"><a href=""></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> stdout</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cwl-workflow" class="slide level2">
+<h2>CWL (workflow)</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>process.cwl</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="process.cwl"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href=""></a><span class="co">#!/usr/bin/env cwl-runner</span></span>
+<span id="cb6-2"><a href=""></a><span class="fu">cwlVersion</span><span class="kw">:</span><span class="at"> v1.2</span></span>
+<span id="cb6-3"><a href=""></a><span class="fu">class</span><span class="kw">:</span><span class="at"> Workflow</span></span>
+<span id="cb6-4"><a href=""></a><span class="fu">doc</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb6-5"><a href=""></a>    Example workflow, that calls dummy.sh script</span>
+<span id="cb6-6"><a href=""></a>    (copies a *.csv file changing extension, and</span>
+<span id="cb6-7"><a href=""></a>    echoes a description to stdout)</span>
+<span id="cb6-8"><a href=""></a></span>
+<span id="cb6-9"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href=""></a><span class="at">  </span><span class="fu">MultipleInputFeatureRequirement</span><span class="kw">:</span><span class="at"> </span><span class="kw">{}</span></span>
+<span id="cb6-11"><a href=""></a></span>
+<span id="cb6-12"><a href=""></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href=""></a><span class="at">  </span><span class="fu">data_file</span><span class="kw">:</span><span class="at"> File</span></span>
+<span id="cb6-14"><a href=""></a><span class="at">  </span><span class="fu">results_folder</span><span class="kw">:</span></span>
+<span id="cb6-15"><a href=""></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> string</span></span>
+<span id="cb6-16"><a href=""></a><span class="at">    </span><span class="fu">default</span><span class="kw">:</span><span class="at"> </span><span class="st">"results"</span></span>
+<span id="cb6-17"><a href=""></a><span class="fu">outputs</span><span class="kw">:</span></span>
+<span id="cb6-18"><a href=""></a><span class="at">  </span><span class="fu">results_dir</span><span class="kw">:</span></span>
+<span id="cb6-19"><a href=""></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> Directory</span></span>
+<span id="cb6-20"><a href=""></a><span class="at">    </span><span class="fu">outputSource</span><span class="kw">:</span><span class="at"> move_to_folder/dir</span></span>
+<span id="cb6-21"><a href=""></a></span>
+<span id="cb6-22"><a href=""></a><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb6-23"><a href=""></a><span class="at">  </span><span class="fu">process_data</span><span class="kw">:</span></span>
+<span id="cb6-24"><a href=""></a><span class="at">    </span><span class="fu">run</span><span class="kw">:</span><span class="at"> tool.cwl</span></span>
+<span id="cb6-25"><a href=""></a><span class="at">    </span><span class="fu">in</span><span class="kw">:</span></span>
+<span id="cb6-26"><a href=""></a><span class="at">      </span><span class="fu">data</span><span class="kw">:</span><span class="at"> data_file</span></span>
+<span id="cb6-27"><a href=""></a><span class="at">    </span><span class="fu">out</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">results_file</span><span class="kw">,</span><span class="at"> log_file</span><span class="kw">]</span></span>
+<span id="cb6-28"><a href=""></a><span class="at">    </span></span>
+<span id="cb6-29"><a href=""></a><span class="at">  </span><span class="fu">move_to_folder</span><span class="kw">:</span></span>
+<span id="cb6-30"><a href=""></a><span class="at">    </span><span class="fu">run</span><span class="kw">:</span><span class="at"> create_dir_from_filelist.cwl</span></span>
+<span id="cb6-31"><a href=""></a><span class="at">    </span><span class="fu">in</span><span class="kw">:</span></span>
+<span id="cb6-32"><a href=""></a><span class="at">      </span><span class="fu">folder</span><span class="kw">:</span><span class="at"> results_folder</span></span>
+<span id="cb6-33"><a href=""></a><span class="at">      </span><span class="fu">files</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-34"><a href=""></a><span class="at">        </span><span class="kw">-</span><span class="at"> process_data/results_file</span></span>
+<span id="cb6-35"><a href=""></a><span class="at">        </span><span class="kw">-</span><span class="at"> process_data/log_file</span></span>
+<span id="cb6-36"><a href=""></a><span class="at">    </span></span>
+<span id="cb6-37"><a href=""></a><span class="at">    </span><span class="fu">out</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">dir</span><span class="kw">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="documentation" class="slide level2">
+<h2>Documentation</h2>
+<h4 id="snakemake-5">Snakemake</h4>
+<ul>
+<li>Basic tutorials &amp; user-guide</li>
+<li>Limited API docs</li>
+<li>Very limited CLI help</li>
+</ul>
+<h4 id="nextflow-5">Nextflow</h4>
+<ul>
+<li>Basic tutorials &amp; user-guide</li>
+<li>Implementation patterns</li>
+<li>Limited API docs</li>
+</ul>
+<h4 id="cwl-4">CWL</h4>
+<ul>
+<li>Basic tutorials &amp; user-guide</li>
+<li>Implementation patterns</li>
+<li>Full Specification</li>
+<li>Very limited CLI help (cwltool)</li>
+</ul>
+</section>
+<section id="interoperability" class="slide level2">
+<h2>Interoperability</h2>
+<h4 id="snakemake-6">Snakemake</h4>
+<ul>
+<li>Run CWL tools</li>
+<li>CWL export (using <code>Snakemake</code> container)</li>
+<li>Handover to <code>Nextflow</code></li>
+</ul>
+<h4 id="nextflow-6">Nextflow</h4>
+<ul>
+<li>Prototype conversion to CWL (abandonded)</li>
+</ul>
+<h4 id="cwl-5">CWL</h4>
+<p>Waits for everyone to conform.</p>
+</section>
+<section id="modularity" class="slide level2">
+<h2>Modularity</h2>
+<h4 id="snakemake-7">Snakemake</h4>
+<ul>
+<li>Rules &amp; Workflows can be <em>included</em> (<code>config</code>, <code>log</code>, etc. are global)</li>
+<li>… or imported as <em>modules</em> (allows name-spacing)</li>
+<li>Changes allowed to everything except execution step</li>
+</ul>
+<h4 id="nextflow-7">Nextflow</h4>
+<ul>
+<li>Processes and workflows must be defined in “module files”</li>
+<li>Changes to parameters and data</li>
+</ul>
+<h4 id="cwl-6">CWL</h4>
+<ul>
+<li>Parent must use <code>SubworkflowFeatureRequirement</code></li>
+<li>All parameters are inputs (and are namespaced)</li>
+<li>Self-contained documentation &amp; validators</li>
+</ul>
+</section>
+<section id="modularity-snakemake" class="slide level2">
+<h2>Modularity (Snakemake)</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>snakemake</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="snakemake"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href=""></a><span class="fu">configfile</span><span class="kw">:</span><span class="at"> </span><span class="st">"config/config.yaml"</span></span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a><span class="fu">module other_workflow</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href=""></a><span class="at">    </span><span class="fu">snakefile</span><span class="kw">:</span><span class="at"> github("snakemake-workflows/github_module",</span></span>
+<span id="cb7-5"><a href=""></a><span class="at">                      path = "workflow/Snakefile", </span></span>
+<span id="cb7-6"><a href=""></a><span class="at">                      tag = "v2.0.1")</span></span>
+<span id="cb7-7"><a href=""></a></span>
+<span id="cb7-8"><a href=""></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span><span class="at"> config["other-workflow"]</span></span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a><span class="fu">use rule some_task from other_workflow as other_some_task with</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href=""></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb7-12"><a href=""></a><span class="at">        </span><span class="st">"results/some-result.txt"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-support" class="slide level2">
+<h2>Task support</h2>
+<p>What can be considered an execution step?</p>
+<h4 id="snakemake-8">Snakemake</h4>
+<p>Bash, Python, R</p>
+<h4 id="nextflow-8">Nextflow</h4>
+<p>Linux scripts: Bash, Perl, Ruby, Python, etc.; Groovy</p>
+<h4 id="cwl-7">CWL</h4>
+<p>Bash, JavaScript, other scripts can be “inlined”</p>
+</section>
+<section id="inlining-scripts-on-cwl" class="slide level2">
+<h2>Inlining scripts on CWL</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>CWL</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="CWL"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href=""></a><span class="fu">baseCommand</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"python3"</span><span class="kw">,</span><span class="at"> </span><span class="st">"say_hello.py"</span><span class="kw">]</span></span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href=""></a><span class="at">  </span><span class="fu">InitialWorkDirRequirement</span><span class="kw">:</span></span>
+<span id="cb8-5"><a href=""></a><span class="at">    </span><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">entryname</span><span class="kw">:</span><span class="at"> say_hello.py</span></span>
+<span id="cb8-7"><a href=""></a><span class="fu">        entry</span><span class="kw">: </span><span class="ch">|-</span></span>
+<span id="cb8-8"><a href=""></a>          print("Hello")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="configuration" class="slide level2">
+<h2>Configuration</h2>
+<h4 id="snakemake-9">Snakemake</h4>
+<ul>
+<li>One or more YAML/JSON/YTE files (inheritance-based hierarchy)</li>
+<li>External validation (json.schema)</li>
+<li>CLI override</li>
+</ul>
+<h4 id="nextflow-9">Nextflow</h4>
+<ul>
+<li>Custom format (allows string-interpolation)</li>
+<li>Conditional profiles, and special “scopes” (e.g.&nbsp;<code>env</code>, <code>executor</code>, <code>conda</code>)</li>
+<li>CLI override</li>
+</ul>
+<h4 id="cwl-8">CWL</h4>
+<ul>
+<li>Dedicated inputs YAML file</li>
+<li>Built-in validation for various types (JS-extensible)</li>
+<li>Overrides via additional YAML file</li>
+</ul>
+</section>
+<section id="logging-reporting" class="slide level2">
+<h2>Logging &amp; Reporting</h2>
+<h4 id="snakemake-10">Snakemake</h4>
+<ul>
+<li><code>log</code> placeholder (does nothing on its own)</li>
+<li>Provenance <code>--summary</code> (limited)</li>
+<li>HTML reports (requires custom annotation)</li>
+</ul>
+<h4 id="nextflow-10">Nextflow</h4>
+<ul>
+<li><code>stdout</code> output type</li>
+<li>Trace &amp; Execution HTML reports (customizable)</li>
+</ul>
+<h4 id="cwl-9">CWL</h4>
+<ul>
+<li><code>stdout</code> as output</li>
+<li>Concise runner logs</li>
+</ul>
+</section>
+<section id="containarization" class="slide level2">
+<h2>Containarization</h2>
+<h4 id="snakemake-11">Snakemake</h4>
+<ul>
+<li>Conda</li>
+<li>Singularity, Apptainer, Docker</li>
+</ul>
+<h4 id="nextflow-11">Nextflow</h4>
+<ul>
+<li>Conda / Spack / Wave</li>
+<li>Apptainer, Docker, Sarus, Shifter, Singularity</li>
+</ul>
+<h4 id="cwl-10">CWL</h4>
+<ul>
+<li>Docker, udocker, Singularity (experimental)</li>
+</ul>
+</section>
+<section id="clustercloud-execution" class="slide level2">
+<h2>Cluster/Cloud execution</h2>
+<h4 id="snakemake-12">Snakemake</h4>
+<ul>
+<li>SLURM, “Generic cluster support”</li>
+<li>Kubernets, Google Cloud Platform (GCP)</li>
+</ul>
+<h4 id="nextflow-12">Nextflow</h4>
+<ul>
+<li>Open Grid Engine, Univa Grid Engine, Platform LSF, Linux SLURM, Flux Framework, PBS Works, Torque, HTCondor</li>
+<li>Amazon Web Services (AWS), GCP, Kubernetes</li>
+</ul>
+<h4 id="cwl-toil">CWL (Toil)</h4>
+<ul>
+<li>Grid Engine, LSF, SLURM, Torque, HTCondor</li>
+<li>Amazon Web Services (AWS), Google Cloud Platform (GCP), Kubernetes</li>
+</ul>
+</section>
+<section id="conclussion" class="slide level2">
+<h2>Conclussion</h2>
+<h4 id="snakemake-researchprototyping-friendly">Snakemake [<em>Research/Prototyping-Friendly</em>]</h4>
+<ul>
+<li>Nice for in-place execution</li>
+<li>Wildcard expansion (if it fits your tools)</li>
+</ul>
+<p>- <em>Too</em> flexible? (lacks structure or best practices), poorly documented (outside existing Omics workflows)</p>
+<h4 id="nextflow-hpc-friendly">Nextflow [<em>HPC-Friendly</em>]</h4>
+<ul>
+<li>Scripting language support, stubs, input/output globbing</li>
+<li>Fine-grained execution control</li>
+</ul>
+<p>- Steep learning curve (Groovy)</p>
+<h4 id="cwl-api-friendly">CWL [<em>API-Friendly</em>]</h4>
+<ul>
+<li>Well structured and robust</li>
+<li>Best documented (specification), clear error reporting</li>
+</ul>
+<p>- Annoyingly verbose, and rigid. Support for runners is patchy.</p>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<p>Jeremy Leipzig, A review of bioinformatic pipeline frameworks, Briefings in Bioinformatics, Volume 18, Issue 3, May 2017, Pages 530–536, https://doi.org/10.1093/bib/bbw020</p>
+<p>V. Curcin and M. Ghanem, “Scientific workflow systems - can one size fit all?,” 2008 Cairo International Biomedical Engineering Conference, Cairo, Egypt, 2008, pp.&nbsp;1-9, https://doi.org/10.1109/CIBEC.2008.4786077</p>
 
 </section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -463,44 +943,6 @@ Martin Herrerias Azcue
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -686,6 +1128,38 @@ Martin Herrerias Azcue
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
