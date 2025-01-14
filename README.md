@@ -1,7 +1,16 @@
-# Quarto + Reveal.js
+# CWL / Snakemake / Nextflow
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+14/01/25 Show & Tell presentation on the differences between CWL, Snakemake, and Nextflow.
 
-Slides should be rendered automatically to `gh-pages`, in this case: <https://uomresearchit.github.io/Quarto-RevealJS-R/>
+<https://uomresearchit.github.io/CWL-Snakemake-Nextflow>
 
-The repo is `R` - specific only in that it installs `R`, `rmarkdown` and `knitr` as part of the [render-quarto.yml](.github/workflows/render-quarto.yml) build action.
+You can play with the examples using the Dockerfile provided in this repository:
+
+```bash
+docker buildx build -t workflow-comparison ./
+docker run -it workflow-comparison
+
+cwltool cwl/process.cwl cwl/inputs.yml
+snakemake -c1 -s snakemake/process.smk
+nextflow run nextflow/process.nf
+```
